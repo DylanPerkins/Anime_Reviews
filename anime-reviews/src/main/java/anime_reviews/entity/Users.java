@@ -26,26 +26,20 @@ import lombok.ToString;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "username")
     private String username;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Column(name = "watched_anime")
     private Set<Long> watchedAnime = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Column(name = "watching_anime")
     private Set<Long> watchingAnime = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Column(name = "want_to_watch")
     private Set<Long> wantToWatch = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Column(name = "wont_watch")
     private Set<Long> wontWatch = new HashSet<>();
 
     @EqualsAndHashCode.Exclude

@@ -21,11 +21,9 @@ import lombok.ToString;
 public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tag_id")
     private Long tagId;
 
     @EqualsAndHashCode.Exclude
-    @Column(name = "tag_name")
     private String tagName;
 
     @EqualsAndHashCode.Exclude

@@ -22,16 +22,9 @@ import lombok.ToString;
 public class Anime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "anime_id")
     private Long animeId;
-
-    @Column(name = "title")
     private String title;
-
-    @Column(name = "animation_studio")
     private String animationStudio;
-
-    @Column(name = "episode_count")
     private Integer episodeCount;
 
     @EqualsAndHashCode.Exclude

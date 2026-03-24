@@ -21,7 +21,6 @@ import lombok.ToString;
 public class AnimeReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_id")
     private Long reviewId;
 
     @EqualsAndHashCode.Exclude
@@ -36,9 +35,7 @@ public class AnimeReview {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @Column(name = "rating")
     private double rating;
 
-    @Column(name = "review_text")
     private String reviewText;
 }
