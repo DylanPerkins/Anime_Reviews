@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -60,6 +61,19 @@ public class GlobalErrorHandler {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ExceptionMessage handleIllegalStateException(IllegalStateException ex, WebRequest webRequest) {
         return buildExceptionMessage(ex, HttpStatus.BAD_REQUEST, webRequest, LogStatus.MESSAGE_ONLY);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ExceptionMessage handleIllegalArgumentException 
+    (IllegalArgumentException ex, WebRequest webRequest ) {
+        return buildExceptionMessage(ex, HttpStatus.UNPROCESSABLE_ENTITY, webRequest, LogStatus.MESSAGE_ONLY);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ExceptionMessage handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest webRequest) {
+        return buildExceptionMessage(ex, HttpStatus.UNPROCESSABLE_ENTITY, webRequest, LogStatus.MESSAGE_ONLY);
     }
 
     private ExceptionMessage buildExceptionMessage(Exception ex, HttpStatus status,
