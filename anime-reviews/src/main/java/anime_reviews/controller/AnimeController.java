@@ -40,7 +40,6 @@ public class AnimeController {
 
     // Update an anime
     @PutMapping("/anime/{animeId}")
-    @ResponseStatus(HttpStatus.OK)
     public AnimeData updateAnime(@PathVariable Long animeId, @RequestBody AnimeData animeData) {
         animeData.setAnimeId(animeId);
 
@@ -51,7 +50,6 @@ public class AnimeController {
 
     // Get all anime and associated tags (if any)
     @GetMapping("/anime")
-    @ResponseStatus(HttpStatus.OK)
     public List<AnimeData> getAllAnime() {
         log.info("Getting all anime info");
 
@@ -60,7 +58,6 @@ public class AnimeController {
 
     // Get a specific anime and associated tags (if any)
     @GetMapping("/anime/{animeId}")
-    @ResponseStatus(HttpStatus.OK)
     public AnimeData retrieveAnime(@PathVariable Long animeId) {
         log.info("Getting anime: {}", animeId);
 
@@ -78,7 +75,6 @@ public class AnimeController {
 
     // Update a tag
     @PutMapping("/tag/{tagId}")
-    @ResponseStatus(HttpStatus.OK)
     public TagsData updateTag(@PathVariable Long tagId, @RequestBody TagsData tagsData) {
         tagsData.setTagId(tagId);
 
@@ -89,7 +85,6 @@ public class AnimeController {
 
     // Get a tag's info
     @GetMapping("/tag/{tagId}")
-    @ResponseStatus(HttpStatus.OK)
     public TagsData retrieveTag(@PathVariable Long tagId) {
         log.info("Getting tag: {}", tagId);
 
@@ -116,7 +111,6 @@ public class AnimeController {
 
     // Update a user's info
     @PutMapping("/user/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public UsersData updateUser(@PathVariable Long userId, @RequestBody UsersData usersData) {
         usersData.setUserId(userId);
 
@@ -127,7 +121,6 @@ public class AnimeController {
 
     // Get all of a user's info
     @GetMapping("/user/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public UsersData retrieveUser(@PathVariable Long userId) {
         log.info("Getting user: {}", userId);
 
@@ -176,7 +169,6 @@ public class AnimeController {
 
     // Remove an anime from user's watched list
     @DeleteMapping("/user/{userId}/watched/{animeId}")
-    @ResponseStatus(HttpStatus.OK)
     public Map<String, String> removeWatchedAnime(@PathVariable Long userId, @PathVariable Long animeId) {
         log.info("Removing anime {} from user {}'s watched list", animeId, userId);
         animeService.removeWatchedAnimeByID(userId, animeId);
@@ -186,7 +178,6 @@ public class AnimeController {
 
     // Remove an anime from user's watching list
     @DeleteMapping("/user/{userId}/watching/{animeId}")
-    @ResponseStatus(HttpStatus.OK)
     public Map<String, String> removeWatchingAnime(@PathVariable Long userId, @PathVariable Long animeId) {
         log.info("Removing anime {} from user {}'s watching list", animeId, userId);
         animeService.removeWatchingAnimeByID(userId, animeId);
@@ -196,7 +187,6 @@ public class AnimeController {
 
     // Remove an anime from user's want to watch list
     @DeleteMapping("/user/{userId}/want-to-watch/{animeId}")
-    @ResponseStatus(HttpStatus.OK)
     public Map<String, String> removeWantToWatchAnime(@PathVariable Long userId, @PathVariable Long animeId) {
         log.info("Removing anime {} from user {}'s want to watch list", animeId, userId);
         animeService.removeWantToWatchAnimeByID(userId, animeId);
@@ -206,7 +196,6 @@ public class AnimeController {
 
     // Remove an anime from user's wont watch list
     @DeleteMapping("/user/{userId}/wont-watch/{animeId}")
-    @ResponseStatus(HttpStatus.OK)
     public Map<String, String> removeWontWatchAnime(@PathVariable Long userId, @PathVariable Long animeId) {
         log.info("Removing anime {} from user {}'s wont watch list", animeId, userId);
         animeService.removeWontWatchAnimeByID(userId, animeId);
@@ -228,7 +217,6 @@ public class AnimeController {
 
     // Update a review
     @PutMapping("user/{userId}/anime/{animeId}/review/{reviewId}")
-    @ResponseStatus(HttpStatus.OK)
     public AnimeReviewData updateReview(@PathVariable Long userId, @PathVariable Long animeId,
             @PathVariable Long reviewId, @RequestBody AnimeReviewData animeReviewData) {
         animeReviewData.setReviewId(reviewId);
@@ -242,7 +230,6 @@ public class AnimeController {
 
     // Delete a review by ID
     @DeleteMapping("user/{userId}/anime/{animeId}/review/{reviewId}")
-    @ResponseStatus(HttpStatus.OK)
     public Map<String, String> deleteReview(@PathVariable Long userId, @PathVariable Long animeId,
             @PathVariable Long reviewId) {
         log.info("Deleting review: {}", reviewId);
@@ -250,23 +237,4 @@ public class AnimeController {
 
         return Map.of("message", "Review ID deleted successfully");
     }
-
-    // // Get all reviews from a user
-    // @GetMapping("/user/{userId}/review")
-    // @ResponseStatus(HttpStatus.OK)
-    // public UsersData retrieveReview(@PathVariable Long userId) {
-    // log.info("Getting reviews: {}", userId);
-
-    // return animeService.retrieveAllReviewsFromUser(userId);
-    // }
-
-    // // Get a specific review from a user
-    // @GetMapping("/user/{userId}/review/{reviewId}")
-    // @ResponseStatus(HttpStatus.OK)
-    // public UsersData retrieveReviewById(@PathVariable Long userId, @PathVariable
-    // Long reviewId) {
-    // log.info("Getting review: {}", reviewId);
-
-    // return animeService.retrieveReviewById(userId, reviewId);
-    // }
 }
