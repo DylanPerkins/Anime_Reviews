@@ -272,6 +272,6 @@ public class AnimeController {
         log.info("Deleting review: {}", reviewId);
         animeService.deleteReviewById(userId, animeId, reviewId);
 
-        return Map.of("message", "Review ID deleted successfully");
+        return Map.of("message", "Review ID=" + reviewId + " deleted successfully");
     }
 }
