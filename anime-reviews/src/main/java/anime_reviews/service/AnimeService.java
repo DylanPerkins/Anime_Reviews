@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -155,74 +157,37 @@ public class AnimeService {
 
     @Transactional(readOnly = false)
     public UsersData addWatchedAnime(Long userId, Long animeId) {
-        if (userId == null || animeId == null) {
-            throw new IllegalArgumentException("User ID and Anime ID must not be null");
-        }
-
-        Users user = findUserById(userId);
-
-        if (user.getWatchedAnime() == null) {
-            user.setWatchedAnime(new HashSet<>());
-        }
-
-        user.getWatchedAnime().add(animeId);
-
-        Users savedUser = userDAO.save(user);
-
-        return new UsersData(savedUser);
+        return addToWatchList(userId, animeId, Users::getWatchedAnime, Users::setWatchedAnime);
     }
 
     @Transactional(readOnly = false)
     public UsersData addWatchingAnime(Long userId, Long animeId) {
-        if (userId == null || animeId == null) {
-            throw new IllegalArgumentException("User ID and Anime ID must not be null");
-        }
-
-        Users user = findUserById(userId);
-
-        if (user.getWatchingAnime() == null) {
-            user.setWatchingAnime(new HashSet<>());
-        }
-
-        user.getWatchingAnime().add(animeId);
-
-        Users savedUser = userDAO.save(user);
-
-        return new UsersData(savedUser);
+        return addToWatchList(userId, animeId, Users::getWatchingAnime, Users::setWatchingAnime);
     }
 
     @Transactional(readOnly = false)
     public UsersData addWantToWatchAnime(Long userId, Long animeId) {
-        if (userId == null || animeId == null) {
-            throw new IllegalArgumentException("User ID and Anime ID must not be null");
-        }
-
-        Users user = findUserById(userId);
-
-        if (user.getWantToWatch() == null) {
-            user.setWantToWatch(new HashSet<>());
-        }
-
-        user.getWantToWatch().add(animeId);
-
-        Users savedUser = userDAO.save(user);
-
-        return new UsersData(savedUser);
+        return addToWatchList(userId, animeId, Users::getWantToWatch, Users::setWantToWatch);
     }
 
     @Transactional(readOnly = false)
     public UsersData addWontWatchAnime(Long userId, Long animeId) {
+        return addToWatchList(userId, animeId, Users::getWontWatch, Users::setWontWatch);
+    }
+
+    private UsersData addToWatchList(Long userId, Long animeId,
+            Function<Users, Set<Long>> getter, BiConsumer<Users, Set<Long>> setter) {
         if (userId == null || animeId == null) {
             throw new IllegalArgumentException("User ID and Anime ID must not be null");
         }
 
         Users user = findUserById(userId);
 
-        if (user.getWontWatch() == null) {
-            user.setWontWatch(new HashSet<>());
+        if (getter.apply(user) == null) {
+            setter.accept(user, new HashSet<>());
         }
 
-        user.getWontWatch().add(animeId);
+        getter.apply(user).add(animeId);
 
         Users savedUser = userDAO.save(user);
 
