@@ -66,10 +66,10 @@ public class GlobalErrorHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ExceptionMessage handleIllegalArgumentException 
-    (IllegalArgumentException ex, WebRequest webRequest ) {
-        return buildExceptionMessage(ex, HttpStatus.UNPROCESSABLE_ENTITY, webRequest, LogStatus.MESSAGE_ONLY);
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public ExceptionMessage handleIllegalArgumentException
+    (IllegalArgumentException ex, WebRequest webRequest) {
+        return buildExceptionMessage(ex, HttpStatus.BAD_REQUEST, webRequest, LogStatus.MESSAGE_ONLY);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
