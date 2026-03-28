@@ -310,7 +310,7 @@ public class AnimeService {
                 .orElseThrow(() -> new NoSuchElementException("Review ID=" + reviewId + " not found"));
 
         if (!review.getUser().getUserId().equals(user.getUserId())
-                && !review.getAnime().getAnimeId().equals(anime.getAnimeId())) {
+                || !review.getAnime().getAnimeId().equals(anime.getAnimeId())) {
             throw new IllegalArgumentException("Review ID=" + reviewId + " does not belong to User ID=" + userId
                     + " and Anime ID=" + animeId);
         }
