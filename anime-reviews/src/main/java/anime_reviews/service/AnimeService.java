@@ -78,7 +78,7 @@ public class AnimeService {
         return animeDataList;
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public AnimeData saveAnime(AnimeData animeData) {
         Anime anime = animeData.toAnime();
 
@@ -87,7 +87,7 @@ public class AnimeService {
         return new AnimeData(savedAnime);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public TagsData saveTag(TagsData tagsData) {
         Tags tag = tagsData.toTags();
 
@@ -96,7 +96,7 @@ public class AnimeService {
         return new TagsData(savedTag);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public UsersData saveUser(UsersData usersData) {
         Users user = usersData.toUsers();
 
@@ -105,7 +105,7 @@ public class AnimeService {
         return new UsersData(savedUser);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public AnimeReviewData saveReview(Long userId, Long animeId, AnimeReviewData animeReviewData) {
         Users user = findUserById(userId);
         Anime anime = findAnimeById(animeId);
@@ -131,7 +131,7 @@ public class AnimeService {
         return new TagsData(tag);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public AnimeData addTagToAnime(Long animeId, Long tagId) {
         Anime anime = findAnimeById(animeId);
         Tags tag = findTagById(tagId);
@@ -155,22 +155,22 @@ public class AnimeService {
         return usersData;
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public UsersData addWatchedAnime(Long userId, Long animeId) {
         return addToWatchList(userId, animeId, Users::getWatchedAnime, Users::setWatchedAnime);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public UsersData addWatchingAnime(Long userId, Long animeId) {
         return addToWatchList(userId, animeId, Users::getWatchingAnime, Users::setWatchingAnime);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public UsersData addWantToWatchAnime(Long userId, Long animeId) {
         return addToWatchList(userId, animeId, Users::getWantToWatch, Users::setWantToWatch);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public UsersData addWontWatchAnime(Long userId, Long animeId) {
         return addToWatchList(userId, animeId, Users::getWontWatch, Users::setWontWatch);
     }
@@ -194,7 +194,7 @@ public class AnimeService {
         return new UsersData(savedUser);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public Set<Long> removeWatchingAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
@@ -204,7 +204,7 @@ public class AnimeService {
         return savedUser.getWatchingAnime();
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public Set<Long> removeWatchedAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
@@ -214,7 +214,7 @@ public class AnimeService {
         return savedUser.getWatchedAnime();
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public Set<Long> removeWantToWatchAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
@@ -224,7 +224,7 @@ public class AnimeService {
         return savedUser.getWantToWatch();
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public Set<Long> removeWontWatchAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
