@@ -41,16 +41,6 @@ public class UsersData {
         }
     }
 
-    public UsersData(Long userId, String username, Set<Long> watchedAnime, Set<Long> watchingAnime,
-            Set<Long> wantToWatch, Set<Long> wontWatch) {
-        this.userId = userId;
-        this.username = username;
-        this.watchedAnime = watchedAnime;
-        this.watchingAnime = watchingAnime;
-        this.wantToWatch = wantToWatch;
-        this.wontWatch = wontWatch;
-    }
-
     public UsersData(Long userId, String username) {
         this.userId = userId;
         this.username = username;
@@ -95,17 +85,17 @@ public class UsersData {
         }
     }
 
-    public UsersData(Long userId2, String username2, Set<Long> watchedAnime2, Set<Long> watchingAnime2,
-            Set<Long> wantToWatch2, Set<Long> wontWatch2, Set<AnimeReview> animeReviews2) {
-        this.userId = userId2;
-        this.username = username2;
-        this.watchedAnime = watchedAnime2;
-        this.watchingAnime = watchingAnime2;
-        this.wantToWatch = wantToWatch2;
-        this.wontWatch = wontWatch2;
+    public UsersData(Long userId, String username, Set<Long> watchedAnime, Set<Long> watchingAnime,
+            Set<Long> wantToWatch, Set<Long> wontWatch, Set<AnimeReview> animeReviews) {
+        this.userId = userId;
+        this.username = username;
+        this.watchedAnime = watchedAnime;
+        this.watchingAnime = watchingAnime;
+        this.wantToWatch = wantToWatch;
+        this.wontWatch = wontWatch;
 
-        if (animeReviews2 != null) {
-            for (AnimeReview review : animeReviews2) {
+        if (animeReviews != null) {
+            for (AnimeReview review : animeReviews) {
                 AnimeReviewData reviewData = new AnimeReviewData(review);
                 this.animeReviews.add(reviewData);
             }
