@@ -286,6 +286,7 @@ public class AnimeService {
                 .orElseThrow(() -> new NoSuchElementException("Tag ID=" + tagId + " not found"));
     }
 
+    @Transactional
     public void deleteReviewById(Long userId, Long animeId, Long reviewId) {
         Users user = findUserById(userId);
         Anime anime = findAnimeById(animeId);
