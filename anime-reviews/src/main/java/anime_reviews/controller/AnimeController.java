@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +26,13 @@ import anime_reviews.controller.model.TagsData;
 import anime_reviews.controller.model.UsersData;
 import anime_reviews.service.AnimeService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(path = "/anime-reviews", produces = "application/json")
 @Slf4j
+@Validated
 public class AnimeController {
 
     @Autowired
@@ -64,7 +67,7 @@ public class AnimeController {
 
     // Search anime by name (partial, case-insensitive)
     @GetMapping("/anime/search/name")
-    public List<AnimeData> findAnimeByName(@RequestParam String name) {
+    public List<AnimeData> findAnimeByName(@NotBlank @RequestParam String name) {
         log.info("Searching anime by name: {}", name);
 
         return animeService.findAnimeByName(name);
@@ -72,7 +75,7 @@ public class AnimeController {
 
     // Search anime by tag name (exact, case-insensitive)
     @GetMapping("/anime/search/tag")
-    public List<AnimeData> findAnimeByTag(@RequestParam String tag) {
+    public List<AnimeData> findAnimeByTag(@NotBlank @RequestParam String tag) {
         log.info("Searching anime by tag: {}", tag);
 
         return animeService.findAnimeByTag(tag);
