@@ -2,6 +2,8 @@ package anime_reviews.controller.error;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.dao.DuplicateKeyException;
@@ -72,8 +74,11 @@ public class GlobalErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ExceptionMessage handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest webRequest) {
-        return buildExceptionMessage(ex, HttpStatus.UNPROCESSABLE_ENTITY, webRequest, LogStatus.MESSAGE_ONLY);
+    public Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage()));
+        return errors;
     }
 
     private ExceptionMessage buildExceptionMessage(Exception ex, HttpStatus status,
