@@ -161,10 +161,6 @@ public class AnimeService {
 
         Users user = findUserById(userId);
 
-        if (user == null) {
-            throw new NoSuchElementException("User ID=" + userId + " not found");
-        }
-
         if (user.getWatchedAnime() == null) {
             user.setWatchedAnime(new HashSet<>());
         }
@@ -183,10 +179,6 @@ public class AnimeService {
         }
 
         Users user = findUserById(userId);
-
-        if (user == null) {
-            throw new NoSuchElementException("User ID=" + userId + " not found");
-        }
 
         if (user.getWatchingAnime() == null) {
             user.setWatchingAnime(new HashSet<>());
@@ -207,10 +199,6 @@ public class AnimeService {
 
         Users user = findUserById(userId);
 
-        if (user == null) {
-            throw new NoSuchElementException("User ID=" + userId + " not found");
-        }
-
         if (user.getWantToWatch() == null) {
             user.setWantToWatch(new HashSet<>());
         }
@@ -229,10 +217,6 @@ public class AnimeService {
         }
 
         Users user = findUserById(userId);
-
-        if (user == null) {
-            throw new NoSuchElementException("User ID=" + userId + " not found");
-        }
 
         if (user.getWontWatch() == null) {
             user.setWontWatch(new HashSet<>());
