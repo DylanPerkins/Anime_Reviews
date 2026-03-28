@@ -1,6 +1,7 @@
 package anime_reviews.controller.model;
 
 import anime_reviews.entity.Tags;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TagsData {
     private Long tagId;
+    @NotBlank(message = "Tag name is required")
     private String tagName;
 
     public TagsData(Tags tag) {

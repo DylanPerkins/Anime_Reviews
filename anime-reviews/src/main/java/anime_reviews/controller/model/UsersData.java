@@ -1,18 +1,19 @@
 package anime_reviews.controller.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import anime_reviews.entity.AnimeReview;
 import anime_reviews.entity.Users;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class UsersData {
     private Long userId;
+    @NotBlank(message = "Username is required")
     private String username;
     private Set<Long> watchedAnime;
     private Set<Long> watchingAnime;

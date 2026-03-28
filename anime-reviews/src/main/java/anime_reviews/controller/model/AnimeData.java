@@ -5,6 +5,10 @@ import java.util.Set;
 
 import anime_reviews.entity.Anime;
 import anime_reviews.entity.Tags;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,9 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnimeData {
     private Long animeId;
+    @NotBlank(message = "Title is required")
     private String title;
+    @NotBlank(message = "Animation studio is required")
     private String animationStudio;
+    @NotNull(message = "Episode count is required")
+    @Min(value = 1, message = "Episode count must be at least 1")
     private Integer episodeCount;
+    @Valid
     private Set<TagsData> tags = new HashSet<>();
 
     public AnimeData(Anime anime) {

@@ -3,6 +3,9 @@ package anime_reviews.controller.model;
 import anime_reviews.entity.Anime;
 import anime_reviews.entity.AnimeReview;
 import anime_reviews.entity.Users;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +15,10 @@ public class AnimeReviewData {
     private Long reviewId;
     private Long animeId;
     private Long userId;
+    @DecimalMin(value = "0.0", message = "Rating must be at least 0.0")
+    @DecimalMax(value = "10.0", message = "Rating must be at most 10.0")
     private double rating;
+    @NotBlank(message = "Review text is required")
     private String reviewText;
 
     public AnimeReviewData(AnimeReview animeReview) {
