@@ -61,10 +61,10 @@ public class UsersData {
 
         user.setUserId(this.userId);
         user.setUsername(this.username);
-        user.setWatchedAnime(this.watchedAnime);
-        user.setWatchingAnime(this.watchingAnime);
-        user.setWantToWatch(this.wantToWatch);
-        user.setWontWatch(this.wontWatch);
+        user.setWatchedAnime(this.watchedAnime != null ? this.watchedAnime : new HashSet<>());
+        user.setWatchingAnime(this.watchingAnime != null ? this.watchingAnime : new HashSet<>());
+        user.setWantToWatch(this.wantToWatch != null ? this.wantToWatch : new HashSet<>());
+        user.setWontWatch(this.wontWatch != null ? this.wontWatch : new HashSet<>());
 
         if (this.animeReviews != null) {
             for (AnimeReviewData reviewData : this.animeReviews) {
