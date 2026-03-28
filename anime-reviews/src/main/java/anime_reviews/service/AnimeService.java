@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -221,39 +222,43 @@ public class AnimeService {
     }
 
     @Transactional(readOnly = false)
-    public void removeWatchingAnimeByID(Long userId, Long animeId) {
+    public Set<Long> removeWatchingAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
         user.getWatchingAnime().remove(animeId);
 
-        userDAO.save(user);
+        Users savedUser = userDAO.save(user);
+        return savedUser.getWatchingAnime();
     }
 
     @Transactional(readOnly = false)
-    public void removeWatchedAnimeByID(Long userId, Long animeId) {
+    public Set<Long> removeWatchedAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
         user.getWatchedAnime().remove(animeId);
-        
-        userDAO.save(user);
+
+        Users savedUser = userDAO.save(user);
+        return savedUser.getWatchedAnime();
     }
 
     @Transactional(readOnly = false)
-    public void removeWantToWatchAnimeByID(Long userId, Long animeId) {
+    public Set<Long> removeWantToWatchAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
         user.getWantToWatch().remove(animeId);
-        
-        userDAO.save(user);
+
+        Users savedUser = userDAO.save(user);
+        return savedUser.getWantToWatch();
     }
 
     @Transactional(readOnly = false)
-    public void removeWontWatchAnimeByID(Long userId, Long animeId) {
+    public Set<Long> removeWontWatchAnimeByID(Long userId, Long animeId) {
         Users user = findUserById(userId);
 
         user.getWontWatch().remove(animeId);
-        
-        userDAO.save(user);
+
+        Users savedUser = userDAO.save(user);
+        return savedUser.getWontWatch();
     }
 
     // Helper Methods
