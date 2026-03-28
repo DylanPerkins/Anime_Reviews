@@ -79,19 +79,19 @@ public class UsersData {
 
     public void removeNullValues() {
         if (this.watchedAnime == null) {
-            this.watchedAnime = Set.of();
+            this.watchedAnime = new HashSet<>();
         }
 
         if (this.watchingAnime == null) {
-            this.watchingAnime = Set.of();
+            this.watchingAnime = new HashSet<>();
         }
 
         if (this.wantToWatch == null) {
-            this.wantToWatch = Set.of();
+            this.wantToWatch = new HashSet<>();
         }
 
         if (this.wontWatch == null) {
-            this.wontWatch = Set.of();
+            this.wontWatch = new HashSet<>();
         }
     }
 
