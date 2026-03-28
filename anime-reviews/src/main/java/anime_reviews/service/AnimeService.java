@@ -52,6 +52,30 @@ public class AnimeService {
         return animeDataList;
     }
 
+    @Transactional(readOnly = true)
+    public List<AnimeData> findAnimeByName(String title) {
+        List<Anime> animeList = animeDAO.findByTitleContainingIgnoreCase(title);
+        List<AnimeData> animeDataList = new LinkedList<>();
+
+        for (Anime anime : animeList) {
+            animeDataList.add(new AnimeData(anime));
+        }
+
+        return animeDataList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<AnimeData> findAnimeByTag(String tagName) {
+        List<Anime> animeList = animeDAO.findByTags_TagNameIgnoreCase(tagName);
+        List<AnimeData> animeDataList = new LinkedList<>();
+
+        for (Anime anime : animeList) {
+            animeDataList.add(new AnimeData(anime));
+        }
+
+        return animeDataList;
+    }
+
     @Transactional(readOnly = false)
     public AnimeData saveAnime(AnimeData animeData) {
         Anime anime = animeData.toAnime();

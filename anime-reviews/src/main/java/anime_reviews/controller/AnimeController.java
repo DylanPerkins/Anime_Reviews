@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,6 +60,22 @@ public class AnimeController {
         log.info("Getting all anime info");
 
         return animeService.retrieveAllAnime();
+    }
+
+    // Search anime by name (partial, case-insensitive)
+    @GetMapping("/anime/search/name")
+    public List<AnimeData> findAnimeByName(@RequestParam String name) {
+        log.info("Searching anime by name: {}", name);
+
+        return animeService.findAnimeByName(name);
+    }
+
+    // Search anime by tag name (exact, case-insensitive)
+    @GetMapping("/anime/search/tag")
+    public List<AnimeData> findAnimeByTag(@RequestParam String tag) {
+        log.info("Searching anime by tag: {}", tag);
+
+        return animeService.findAnimeByTag(tag);
     }
 
     // Get a specific anime and associated tags (if any)
