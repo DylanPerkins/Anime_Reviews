@@ -65,7 +65,7 @@ public class AnimeController {
         return animeService.retrieveAllAnime();
     }
 
-    // Search anime by name (partial, case-insensitive)
+    // Search anime by name (partial, not case sensitive)
     @GetMapping("/anime/search/name")
     public List<AnimeData> findAnimeByName(@NotBlank @RequestParam String name) {
         log.info("Searching anime by name: {}", name);
@@ -73,7 +73,7 @@ public class AnimeController {
         return animeService.findAnimeByName(name);
     }
 
-    // Search anime by tag name (exact, case-insensitive)
+    // Search anime by tag name (exact, not case sensitive)
     @GetMapping("/anime/search/tag")
     public List<AnimeData> findAnimeByTag(@NotBlank @RequestParam String tag) {
         log.info("Searching anime by tag: {}", tag);
